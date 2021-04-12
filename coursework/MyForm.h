@@ -49,6 +49,7 @@ namespace coursework {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Button^ button4;
 
 
 
@@ -76,6 +77,7 @@ namespace coursework {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			this->SuspendLayout();
@@ -92,7 +94,7 @@ namespace coursework {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(321, 79);
+			this->button2->Location = System::Drawing::Point(489, 79);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(106, 23);
 			this->button2->TabIndex = 2;
@@ -174,11 +176,22 @@ namespace coursework {
 			this->label3->TabIndex = 10;
 			this->label3->Text = L"«начение элемента";
 			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(316, 79);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(123, 23);
+			this->button4->TabIndex = 11;
+			this->button4->Text = L"”далить последний";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(969, 419);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->numericUpDown2);
 			this->Controls->Add(this->button3);
@@ -241,6 +254,16 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 		if (index == -1) MessageBox::Show("«начение не найдено");
 		else MessageBox::Show("»ндекс значени€ " + key + " равен " + index);
 	}
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (num.size() >= 1) {
+		num.pop_back();
+		richTextBox1->Text = "";
+		for (int i = 0; i < num.size(); i++) {
+			richTextBox1->Text = richTextBox1->Text + num[i] + " ";
+		}
+	}
+	else MessageBox::Show("Ёлементы отсутствуют");
 }
 };
 }
