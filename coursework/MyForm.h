@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <algorithm>
+#include "SearchBi.h"
 std::vector <int> num;
 namespace coursework {
 
@@ -42,6 +44,11 @@ namespace coursework {
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown1;
 	private: System::Windows::Forms::RichTextBox^ richTextBox1;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::RichTextBox^ richTextBox2;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
+	private: System::Windows::Forms::Label^ label3;
 
 
 
@@ -64,7 +71,13 @@ namespace coursework {
 			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->richTextBox2 = (gcnew System::Windows::Forms::RichTextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->label3 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button1
@@ -100,7 +113,7 @@ namespace coursework {
 			// 
 			this->richTextBox1->Location = System::Drawing::Point(38, 145);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(389, 81);
+			this->richTextBox1->Size = System::Drawing::Size(389, 96);
 			this->richTextBox1->TabIndex = 4;
 			this->richTextBox1->Text = L"";
 			this->richTextBox1->TextChanged += gcnew System::EventHandler(this, &MyForm::richTextBox1_TextChanged);
@@ -115,11 +128,62 @@ namespace coursework {
 			this->label1->Text = L"Введенные числа";
 			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click_1);
 			// 
+			// richTextBox2
+			// 
+			this->richTextBox2->Location = System::Drawing::Point(456, 145);
+			this->richTextBox2->Name = L"richTextBox2";
+			this->richTextBox2->Size = System::Drawing::Size(389, 96);
+			this->richTextBox2->TabIndex = 6;
+			this->richTextBox2->Text = L"";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(610, 124);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(99, 13);
+			this->label2->TabIndex = 7;
+			this->label2->Text = L"Отсортированные";
+			this->label2->Click += gcnew System::EventHandler(this, &MyForm::label2_Click);
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(613, 331);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 8;
+			this->button3->Text = L"Поиск ";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			// 
+			// numericUpDown2
+			// 
+			this->numericUpDown2->Location = System::Drawing::Point(589, 291);
+			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 99999999, 0, 0, 0 });
+			this->numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, System::Int32::MinValue });
+			this->numericUpDown2->Name = L"numericUpDown2";
+			this->numericUpDown2->Size = System::Drawing::Size(120, 20);
+			this->numericUpDown2->TabIndex = 9;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(602, 262);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(107, 13);
+			this->label3->TabIndex = 10;
+			this->label3->Text = L"Значение элемента";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(873, 419);
+			this->ClientSize = System::Drawing::Size(969, 419);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->numericUpDown2);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->richTextBox2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->numericUpDown1);
@@ -128,6 +192,7 @@ namespace coursework {
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -147,7 +212,12 @@ namespace coursework {
 
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		sort(num.begin(), num.end());
+		for (int i = 0; i < num.size(); i++) {
+			richTextBox2->Text = richTextBox2->Text + num[i] + " ";
+
+
+		}
 	}
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 		
@@ -156,6 +226,18 @@ private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::E
 
 }
 private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
+
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (richTextBox2->Text == "") MessageBox::Show("Массив не отсортирован! Нажмите сортирвать");
+	else {
+		int key = (int)numericUpDown2->Value;
+		int index = searchbi(num, key);
+		if (index == -1) MessageBox::Show("Значение не найдено");
+		else MessageBox::Show("Индекс значения " + key + " равен " + index);
+	}
 }
 };
 }
