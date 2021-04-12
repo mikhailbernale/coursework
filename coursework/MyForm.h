@@ -190,7 +190,7 @@ namespace coursework {
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Курсовая ";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			this->ResumeLayout(false);
@@ -206,13 +206,16 @@ namespace coursework {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		
 		num.push_back((int)numericUpDown1->Value);
-		static int i = 0;
-		richTextBox1->Text = richTextBox1->Text + num[i++] + " ";
+		//static int i = 0;
+		richTextBox1->Text = "";
+		for (int i=0; i<num.size();i++)
+			richTextBox1->Text = richTextBox1->Text + num[i] + " ";
 		
 
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		sort(num.begin(), num.end());
+		richTextBox2->Text = "";
 		for (int i = 0; i < num.size(); i++) {
 			richTextBox2->Text = richTextBox2->Text + num[i] + " ";
 
