@@ -1,5 +1,5 @@
 #include "SearchBi.h"
-int searchbi(std::vector<int> arr, int key)
+int searchbi(std::vector<double> arr, double key)
 {
 //	sort(arr.begin(), arr.end());//бинарный поиск работает только для отс. массива
 	int left = 0;//левая граница

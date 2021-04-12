@@ -3,7 +3,7 @@
 #include <string>
 #include <algorithm>
 #include "SearchBi.h"
-std::vector <int> num;
+std::vector <double> num;
 namespace coursework {
 
 	using namespace System;
@@ -104,6 +104,7 @@ namespace coursework {
 			// 
 			// numericUpDown1
 			// 
+			this->numericUpDown1->DecimalPlaces = 5;
 			this->numericUpDown1->Location = System::Drawing::Point(38, 82);
 			this->numericUpDown1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, 0 });
 			this->numericUpDown1->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, System::Int32::MinValue });
@@ -160,6 +161,7 @@ namespace coursework {
 			// 
 			// numericUpDown2
 			// 
+			this->numericUpDown2->DecimalPlaces = 4;
 			this->numericUpDown2->Location = System::Drawing::Point(589, 291);
 			this->numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 99999999, 0, 0, 0 });
 			this->numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999999, 0, 0, System::Int32::MinValue });
@@ -218,10 +220,10 @@ namespace coursework {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		
-		num.push_back((int)numericUpDown1->Value);
+		num.push_back((double)numericUpDown1->Value);
 		//static int i = 0;
 		richTextBox1->Text = "";
-		for (int i=0; i<num.size();i++)
+		for (unsigned int i=0; i<num.size();i++)
 			richTextBox1->Text = richTextBox1->Text + num[i] + " ";
 		
 
@@ -229,7 +231,7 @@ namespace coursework {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		sort(num.begin(), num.end());
 		richTextBox2->Text = "";
-		for (int i = 0; i < num.size(); i++) {
+		for (unsigned int i = 0; i < num.size(); i++) {
 			richTextBox2->Text = richTextBox2->Text + num[i] + " ";
 
 
@@ -249,7 +251,7 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (richTextBox2->Text == "") MessageBox::Show("Массив не отсортирован! Нажмите сортирвать");
 	else {
-		int key = (int)numericUpDown2->Value;
+		double key = (double)numericUpDown2->Value;
 		int index = searchbi(num, key);
 		if (index == -1) MessageBox::Show("Значение не найдено");
 		else MessageBox::Show("Индекс значения " + key + " равен " + index);
@@ -259,7 +261,8 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	if (num.size() >= 1) {
 		num.pop_back();
 		richTextBox1->Text = "";
-		for (int i = 0; i < num.size(); i++) {
+		richTextBox2->Text = "";
+		for (unsigned int i = 0; i < num.size(); i++) {
 			richTextBox1->Text = richTextBox1->Text + num[i] + " ";
 		}
 	}

@@ -1,4 +1,4 @@
 #pragma once
-#include <vector>;
+#include <vector>
 #include <algorithm>
-int searchbi(std::vector <int> num, int key);
+int searchbi(std::vector <double> num, double key);
