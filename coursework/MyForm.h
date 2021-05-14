@@ -50,6 +50,7 @@ namespace coursework {
 	private: System::Windows::Forms::NumericUpDown^ numericUpDown2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Label^ label4;
 
 
 
@@ -78,6 +79,7 @@ namespace coursework {
 			this->numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			this->SuspendLayout();
@@ -98,7 +100,7 @@ namespace coursework {
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(106, 23);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"Сортировка";
+			this->button2->Text = L"Сортировать";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
@@ -111,6 +113,7 @@ namespace coursework {
 			this->numericUpDown1->Name = L"numericUpDown1";
 			this->numericUpDown1->Size = System::Drawing::Size(120, 20);
 			this->numericUpDown1->TabIndex = 3;
+			this->numericUpDown1->ValueChanged += gcnew System::EventHandler(this, &MyForm::numericUpDown1_ValueChanged);
 			// 
 			// richTextBox1
 			// 
@@ -188,11 +191,21 @@ namespace coursework {
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
 			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(70, 56);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(39, 13);
+			this->label4->TabIndex = 12;
+			this->label4->Text = L"Числа";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(969, 419);
+			this->Controls->Add(this->label4);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->numericUpDown2);
@@ -205,7 +218,7 @@ namespace coursework {
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Name = L"MyForm";
-			this->Text = L"Курсовая ";
+			this->Text = L"Бинарный поиск";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->EndInit();
 			this->ResumeLayout(false);
@@ -219,23 +232,29 @@ namespace coursework {
 		
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		
-		num.push_back((double)numericUpDown1->Value);
-		//static int i = 0;
-		richTextBox1->Text = "";
-		for (unsigned int i=0; i<num.size();i++)
-			richTextBox1->Text = richTextBox1->Text + num[i] + " ";
-		
-
-	}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		sort(num.begin(), num.end());
-		richTextBox2->Text = "";
-		for (unsigned int i = 0; i < num.size(); i++) {
-			richTextBox2->Text = richTextBox2->Text + num[i] + " ";
-
+		if (numericUpDown1->Text == "") {
+			MessageBox::Show("Вы ввели пустую строку. Введите число");
+		}
+		else {
+			num.push_back((double)numericUpDown1->Value);
+			//static int i = 0;
+			richTextBox1->Text = "";
+			for (unsigned int i = 0; i < num.size(); i++)
+				richTextBox1->Text = richTextBox1->Text + num[i] + " ";
 
 		}
+	}
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (num.size() >= 1) {
+			sort(num.begin(), num.end());
+			richTextBox2->Text = "";
+			for (unsigned int i = 0; i < num.size(); i++) {
+				richTextBox2->Text = richTextBox2->Text + num[i] + " ";
+
+
+			}
+		}
+		else MessageBox::Show("Массив пуст");
 	}
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 		
@@ -249,7 +268,7 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (richTextBox2->Text == "") MessageBox::Show("Массив не отсортирован! Нажмите сортирвать");
+	if (richTextBox2->Text == "") MessageBox::Show("Массив не отсортирован! Нажмите сортировать");
 	else {
 		double key = (double)numericUpDown2->Value;
 		int index = searchbi(num, key);
@@ -267,6 +286,8 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 		}
 	}
 	else MessageBox::Show("Элементы отсутствуют");
+}
+private: System::Void numericUpDown1_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
