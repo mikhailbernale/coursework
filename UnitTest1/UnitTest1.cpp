@@ -21,6 +21,7 @@ namespace UnitTest1
 			Assert::AreEqual( searchbi(num2, 0), 2);
 			Assert::AreEqual( searchbi(num3, 200), -1);//Число не найдено
 			Assert::AreEqual( searchbi(num3, 2.3), 1);
+			Assert::AreEqual("54 56 78", "54 56 78");
 		}
 	};
 }
